@@ -7,13 +7,15 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Entity
-@Table(name = "ROLE_TABLE")
+@Table(schema = "auth", name = "role")
 public class RoleEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "id")
     private Long id;
 
+    @Column(name = "name")
     private String roleName;
 
     @JsonBackReference

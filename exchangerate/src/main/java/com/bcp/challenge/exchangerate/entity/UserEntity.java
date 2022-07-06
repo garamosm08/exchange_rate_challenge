@@ -7,22 +7,29 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Entity
-@Table(name = "USER_TABLE")
+@Table(schema = "auth", name = "user")
 public class UserEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "id")
     private Long id;
 
-    @Column(name = "USER_NAME", nullable = false)
+    @Column(name = "username", nullable = false)
     private String username;
+
+    @Column(name = "password")
     private String password;
+
+    @Column(name = "first_name")
     private String firstName;
+
+    @Column(name = "last_name")
     private String lastName;
 
     @JsonManagedReference
     @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    @JoinTable(name = "USER_ROLE",
+    @JoinTable(schema = "auth", name = "user_role",
             joinColumns = { @JoinColumn(name = "user_id")},
             inverseJoinColumns = {@JoinColumn(name = "role_id")})
     private Set<RoleEntity> roles = new HashSet<>();

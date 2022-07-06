@@ -1,0 +1,1 @@
+Este archivo de texto es informativo para mencionar que esta carpeta es para persistir el volumen de la data de la base de datos postgresql en un ambiente local

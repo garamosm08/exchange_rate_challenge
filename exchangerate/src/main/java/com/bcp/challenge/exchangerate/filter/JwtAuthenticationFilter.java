@@ -15,6 +15,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.List;
 
 @Component
 public class JwtAuthenticationFilter extends OncePerRequestFilter {
@@ -26,32 +27,41 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
     private JwtUtil jwtUtil;
 
     @Override
-    protected void doFilterInternal(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, FilterChain filterChain) throws ServletException, IOException {
-        String bearerToken = httpServletRequest.getHeader("Authorization");
-        String username = null;
-        String token = null;
-
-        if(bearerToken != null && bearerToken.startsWith("Bearer ")){
-            token = bearerToken.substring(7);
-
-            try {
-                username = jwtUtil.extractUsername(token);
-
-                UserDetails userDetails = customUserDetailService.loadUserByUsername(username);
-
-                if(username != null && SecurityContextHolder.getContext().getAuthentication() == null){
-                    UsernamePasswordAuthenticationToken upat = new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
-                    upat.setDetails(new WebAuthenticationDetailsSource().buildDetails(httpServletRequest));
-
-                    SecurityContextHolder.getContext().setAuthentication(upat);
-                } else {
-                    System.out.println("Invalid Token!!");
-                }
-            } catch (Exception ex){
-                ex.printStackTrace();
-            }
-        } else {
+    protected void doFilterInternal(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, FilterChain filterChain)
+            throws ServletException, IOException {
+        final String header = httpServletRequest.getHeader("Authorization");
+        if(header == null || header.isEmpty() || !header.startsWith("Bearer ")){
             System.out.println("Invalid Bearer Token Format!!");
+            filterChain.doFilter(httpServletRequest, httpServletResponse);
+            return;
+        }
+
+        String token = header.substring(7);
+
+        try {
+            String username = jwtUtil.extractUsername(token);
+
+            UserDetails userDetails = customUserDetailService.loadUserByUsername(username);
+
+            /*if(username != null && SecurityContextHolder.getContext().getAuthentication() == null){
+                UsernamePasswordAuthenticationToken upat = new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
+                upat.setDetails(new WebAuthenticationDetailsSource().buildDetails(httpServletRequest));
+
+                SecurityContextHolder.getContext().setAuthentication(upat);
+            } else {
+                System.out.println("Invalid Token!!");
+            }*/
+            UsernamePasswordAuthenticationToken upat = new UsernamePasswordAuthenticationToken(
+                    userDetails, null,
+                    userDetails == null ? List.of() : userDetails.getAuthorities());
+
+            upat.setDetails(
+                    new WebAuthenticationDetailsSource().buildDetails(httpServletRequest)
+            );
+
+            SecurityContextHolder.getContext().setAuthentication(upat);
+        } catch (Exception ex){
+            ex.printStackTrace();
         }
 
         filterChain.doFilter(httpServletRequest, httpServletResponse);

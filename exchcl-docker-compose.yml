@@ -1,0 +1,30 @@
+version: '3.9'
+services:
+
+  # Se define las configuraciones para la BD postgres
+  db-postgres:
+    # Se utiliza la imagen de la BD levantada en harbor
+    image: "postgres:14.1-alpine"
+    restart: always
+    # Se agregar el nombre para la BD
+    container_name: db-postgres
+    # Se define el volumen para almacenar los datos de la BD
+    volumes: 
+      - ./postgres-data:/var/lib/postgresql/data
+      # copy the sql script to create tables
+      - ./sql_scripts/initialize_db.sql:/docker-entrypoint-initdb.d/initialize_db.sql
+    # Se expone el puerto 5432 en el host para la BD
+    ports:
+      - 5432:5432
+    # Se definen la variables de ambiente para las credenciales de la BD
+    environment:
+      - POSTGRES_DB=exchcl
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+    # Se asigna el contenedor para tener acceso en la red de exchcl-net
+    networks:
+      - exchcl-net
+
+# Se define la red exchcl-net
+networks:
+   exchcl-net:
