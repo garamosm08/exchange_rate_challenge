@@ -21,6 +21,7 @@ services:
       - POSTGRES_DB=exchcl
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=postgres
+      - PGDATA=/tmp
     # Se asigna el contenedor para tener acceso en la red de exchcl-net
     networks:
       - exchcl-net
