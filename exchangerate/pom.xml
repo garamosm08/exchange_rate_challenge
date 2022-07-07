@@ -10,7 +10,7 @@
 	</parent>
 	<groupId>com.bcp.challenge</groupId>
 	<artifactId>exchangerate</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>1.0.0</version>
 	<name>exchangerate</name>
 	<description>Challengue project for Exchange rate Api</description>
 	<properties>
