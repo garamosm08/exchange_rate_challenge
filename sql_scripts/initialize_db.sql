@@ -149,7 +149,7 @@ ALTER TABLE IF EXISTS exchange_rate.account
     REFERENCES exchange_rate.currency (id) MATCH SIMPLE
     ON UPDATE NO ACTION
     ON DELETE NO ACTION
-    NOT VALID
+    NOT VALID;
 
 ---------------------------------------------------------
 
@@ -194,21 +194,21 @@ VALUES((SELECT nextval('auth.seq_user')), '12344321', '$2a$10$qIcGJhdTAgVStOIeYi
 
 INSERT INTO auth."user_role"(user_id, role_id)
 VALUES((SELECT id FROM auth."user" WHERE username = '12344321'), 
-        SELECT id FROM auth."role" WHERE name = 'ROLE_ADMIN');
+        (SELECT id FROM auth."role" WHERE name = 'ROLE_ADMIN'));
 
 INSERT INTO auth."user"(id, username, password, first_name, last_name)
 VALUES((SELECT nextval('auth.seq_user')), '12345678', '$2a$10$mAsOAJoQV9lB1SvBMX0XYu9l3LRH4DFmY72fjB1W9DY9orXDkkIyu', 'Andres', 'Montalvo');
 
 INSERT INTO auth."user_role"(user_id, role_id)
 VALUES((SELECT id FROM auth."user" WHERE username = '12345678'), 
-        SELECT id FROM auth."role" WHERE name = 'ROLE_USER');
+        (SELECT id FROM auth."role" WHERE name = 'ROLE_USER'));
 
 INSERT INTO auth."user"(id, username, password, first_name, last_name)
 VALUES((SELECT nextval('auth.seq_user')), '14784512', '$2a$10$mAsOAJoQV9lB1SvBMX0XYu9l3LRH4DFmY72fjB1W9DY9orXDkkIyu', 'Ronald', 'Gutierrez');
 
 INSERT INTO auth."user_role"(user_id, role_id)
 VALUES((SELECT id FROM auth."user" WHERE username = '14784512'), 
-        SELECT id FROM auth."role" WHERE name = 'ROLE_USER');
+        (SELECT id FROM auth."role" WHERE name = 'ROLE_USER'));
 
 INSERT INTO exchange_rate.currency(id, codigo, etiqueta, fecha)
 VALUES((SELECT nextval('exchange_rate.seq_currency')), 'PEN', 'Soles peruanos', now());
@@ -229,4 +229,3 @@ VALUES((SELECT nextval('exchange_rate.seq_account')), '19165790173495', 'Cuenta 
         100.00, now());
 
 COMMIT;
-
