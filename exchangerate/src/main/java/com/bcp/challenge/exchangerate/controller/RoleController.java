@@ -24,10 +24,4 @@ public class RoleController {
     public List<RoleModel> getAllRoles(){
         return roleService.getAllRoles();
     }
-
-    @PreAuthorize("hasRole('ADMIN') or principal.userId == #userId")
-    @DeleteMapping("/roles/{userId}/{roleId}")
-    public void deleteRole(@PathVariable Long userId, @PathVariable Long roleId){
-        roleService.deleteRoleById(roleId);
-    }
 }

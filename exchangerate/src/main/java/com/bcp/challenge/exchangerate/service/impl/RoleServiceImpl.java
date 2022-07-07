@@ -21,11 +21,11 @@ public class RoleServiceImpl implements RoleService {
     public RoleModel createRole(RoleModel roleModel) {
 
         RoleEntity roleEntity = new RoleEntity();
-        BeanUtils.copyProperties(roleModel, roleEntity);//model to entity conversion
+        BeanUtils.copyProperties(roleModel, roleEntity);
 
         RoleEntity roleEntity1 = roleRepository.save(roleEntity);
 
-        BeanUtils.copyProperties(roleEntity1, roleModel);//entity to model conversion
+        BeanUtils.copyProperties(roleEntity1, roleModel);
         return roleModel;
     }
 

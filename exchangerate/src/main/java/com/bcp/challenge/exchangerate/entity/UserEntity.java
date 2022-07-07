@@ -34,6 +34,9 @@ public class UserEntity {
             inverseJoinColumns = {@JoinColumn(name = "role_id")})
     private Set<RoleEntity> roles = new HashSet<>();
 
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
+    private Set<AccountEntity> accounts;
+
     public Set<RoleEntity> getRoles() {
         return roles;
     }
@@ -80,6 +83,14 @@ public class UserEntity {
 
     public void setLastName(String lastName) {
         this.lastName = lastName;
+    }
+
+    public Set<AccountEntity> getAccounts() {
+        return accounts;
+    }
+
+    public void setAccounts(Set<AccountEntity> accounts) {
+        this.accounts = accounts;
     }
 
     @Override
