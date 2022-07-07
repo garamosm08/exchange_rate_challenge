@@ -51,7 +51,7 @@ public class JwtConfig extends WebSecurityConfigurerAdapter  {
             .csrf()
             .disable()
             .authorizeRequests()
-            .antMatchers("/api/login", "/api/register", "/api/roles").permitAll()
+            .antMatchers("/api/auth/login", "/api/auth/register", "/api/roles").permitAll()
             .anyRequest().authenticated()
             .and()
             .exceptionHandling().authenticationEntryPoint(jwtAuthenticationEntryPoint)
@@ -82,9 +82,4 @@ public class JwtConfig extends WebSecurityConfigurerAdapter  {
         source.registerCorsConfiguration("/**", config);
         return new CorsFilter(source);
     }
-
-    /*@Bean
-    public HttpSessionEventPublisher httpSessionEventPublisher() {
-        return new HttpSessionEventPublisher();
-    }*/
 }
