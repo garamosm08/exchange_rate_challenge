@@ -1,0 +1,591 @@
+{
+	"info": {
+		"_postman_id": "7b1467e8-e42d-407b-bc33-e0aa508bac9c",
+		"name": "BCP_Exchange_Rate_Challengue",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "local",
+			"item": [
+				{
+					"name": "auth",
+					"item": [
+						{
+							"name": "Create user - Admin",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"username\": \"admin2\",\n\t\"password\": \"$admin2\",\n\t\"firstName\": \"Gustavo\",\n\t\"lastName\": \"Ramos\",\n\t\"roles\": [\n        {\"id\": 5}\n    ]\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/api/auth/register",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"auth",
+										"register"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Create user - User",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"username\": \"12345678\",\n\t\"password\": \"$user123\",\n\t\"firstName\": \"Andrés\",\n\t\"lastName\": \"Montalvo\",\n\t\"roles\": [\n        {\"id\": 6}\n    ]\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/api/auth/register",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"auth",
+										"register"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Create role - Admin",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"roleName\": \"ROLE_ADMIN\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/api/roles",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"roles"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Create role - User",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"roleName\": \"ROLE_USER\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/api/roles",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"roles"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get all roles",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/api/roles",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"roles"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Login user - Admin",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"userName\": \"12344321\",\n\t\"password\": \"$admin2\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/api/auth/login",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"auth",
+										"login"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Login user - User",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"userName\": \"12345678\",\n\t\"password\": \"$user123\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/api/auth/login",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"auth",
+										"login"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get current user",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxMjM0NDMyMSIsImV4cCI6MTY1NzIxNDY4NSwiaWF0IjoxNjU3MjExMDg1fQ.EMzy_MjnZco7kwTf-x2bZIf4ZRHwCBkRzl_FkQdxjcA",
+										"type": "default"
+									}
+								],
+								"url": {
+									"raw": "http://localhost:8080/api/auth/currentUser",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"auth",
+										"currentUser"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "exchange_process",
+					"item": [
+						{
+							"name": "currency",
+							"item": [
+								{
+									"name": "Get all currencies",
+									"request": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "Authorization",
+												"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxMjM0NDMyMSIsImV4cCI6MTY1NzIzNDcxMywiaWF0IjoxNjU3MjMxMTEzfQ.DW37LDF7xdJdz8f-lJqbB2a8fSzNKixZtvho0O_6PLU",
+												"type": "default"
+											}
+										],
+										"url": {
+											"raw": "http://localhost:8080/api/currencies",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "8080",
+											"path": [
+												"api",
+												"currencies"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Get currency by id",
+									"request": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "Authorization",
+												"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxMjM0NDMyMSIsImV4cCI6MTY1NzE3MTUwNywiaWF0IjoxNjU3MTY3OTA3fQ.1plz5ByHmzI2FAjZkBT4Fff_Yo2lEYLeeWECncg4rqM",
+												"type": "default"
+											}
+										],
+										"url": {
+											"raw": "http://localhost:8080/api/currencies/1",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "8080",
+											"path": [
+												"api",
+												"currencies",
+												"1"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Create currency",
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Authorization",
+												"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxMjM0NDMyMSIsImV4cCI6MTY1NzIxNDY4NSwiaWF0IjoxNjU3MjExMDg1fQ.EMzy_MjnZco7kwTf-x2bZIf4ZRHwCBkRzl_FkQdxjcA",
+												"type": "default"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"codigo\": \"EUR\",\n    \"etiqueta\": \"Euro\"\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "http://localhost:8080/api/currencies",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "8080",
+											"path": [
+												"api",
+												"currencies"
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						},
+						{
+							"name": "exchange_type",
+							"item": [
+								{
+									"name": "Get all exchange types",
+									"request": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "Authorization",
+												"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxMjM0NDMyMSIsImV4cCI6MTY1NzIzNDcxMywiaWF0IjoxNjU3MjMxMTEzfQ.DW37LDF7xdJdz8f-lJqbB2a8fSzNKixZtvho0O_6PLU",
+												"type": "default"
+											}
+										],
+										"url": {
+											"raw": "http://localhost:8080/api/exchangetypes",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "8080",
+											"path": [
+												"api",
+												"exchangetypes"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Get exchange type by id",
+									"request": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "Authorization",
+												"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxMjM0NTY3OCIsImV4cCI6MTY1NzIxNTU3MywiaWF0IjoxNjU3MjExOTczfQ.YM2mBYvZxVU8x1sSlCKzcEQK-ljOiy4ObeVyvjm4tmE",
+												"type": "default"
+											}
+										],
+										"url": {
+											"raw": "http://localhost:8080/api/exchangetypes/1",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "8080",
+											"path": [
+												"api",
+												"exchangetypes",
+												"1"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Create exchange type",
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Authorization",
+												"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxMjM0NDMyMSIsImV4cCI6MTY1NzIzNDcxMywiaWF0IjoxNjU3MjMxMTEzfQ.DW37LDF7xdJdz8f-lJqbB2a8fSzNKixZtvho0O_6PLU",
+												"type": "default"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"localCurrencyId\": 1,\n    \"foreignCurrencyId\": 3,\n    \"purchaseValue\": 3.878,\n    \"salesValue\": 3.888\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "http://localhost:8080/api/exchangetypes",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "8080",
+											"path": [
+												"api",
+												"exchangetypes"
+											],
+											"query": [
+												{
+													"key": "",
+													"value": null,
+													"disabled": true
+												}
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Create exchange type Copy",
+									"request": {
+										"method": "PUT",
+										"header": [
+											{
+												"key": "Authorization",
+												"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxMjM0NDMyMSIsImV4cCI6MTY1NzIxNTYyMSwiaWF0IjoxNjU3MjEyMDIxfQ.tIkz3HxoG2r4Dyt7m-3Gv9sc2r4CflJg52yLQbzibYs",
+												"type": "default"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"purchaseValue\": 3.878,\n    \"salesValue\": 3.92\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "http://localhost:8080/api/exchangetypes/1",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "8080",
+											"path": [
+												"api",
+												"exchangetypes",
+												"1"
+											],
+											"query": [
+												{
+													"key": "",
+													"value": null,
+													"disabled": true
+												}
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						},
+						{
+							"name": "account",
+							"item": [
+								{
+									"name": "Get all accounts by customer id",
+									"request": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "Authorization",
+												"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxMjM0NTY3OCIsImV4cCI6MTY1NzIzNDcwNywiaWF0IjoxNjU3MjMxMTA3fQ.bliXS3ObyANzM4g0C1uEGQKNCoVxk08GZpk68vT1bfQ",
+												"type": "default"
+											}
+										],
+										"url": {
+											"raw": "http://localhost:8080/api/accounts",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "8080",
+											"path": [
+												"api",
+												"accounts"
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						},
+						{
+							"name": "exchange_rate",
+							"item": [
+								{
+									"name": "Exchange rate - Case PEN-USD",
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Authorization",
+												"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxMjM0NTY3OCIsImV4cCI6MTY1NzIzNDcwNywiaWF0IjoxNjU3MjMxMTA3fQ.bliXS3ObyANzM4g0C1uEGQKNCoVxk08GZpk68vT1bfQ",
+												"type": "default"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"sourceAccountId\": 1,\n    \"sourceCurrencyId\": 1,\n    \"targetAccountId\": 3,\n    \"targetCurrencyId\": 3,\n    \"amount\": 10\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "http://localhost:8080/api/exchangerates",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "8080",
+											"path": [
+												"api",
+												"exchangerates"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Exchange rate - Case USD-PEN",
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Authorization",
+												"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxMjM0NTY3OCIsImV4cCI6MTY1NzIxNTU3MywiaWF0IjoxNjU3MjExOTczfQ.YM2mBYvZxVU8x1sSlCKzcEQK-ljOiy4ObeVyvjm4tmE",
+												"type": "default"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"sourceAccountId\": 3,\n    \"sourceCurrencyId\": 3,\n    \"targetAccountId\": 1,\n    \"targetCurrencyId\": 1,\n    \"amount\": 10\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "http://localhost:8080/api/exchangerates",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "8080",
+											"path": [
+												"api",
+												"exchangerates"
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						}
+					]
+				}
+			]
+		}
+	]
+}
