@@ -11,6 +11,7 @@ import com.bcp.challenge.exchangerate.service.CurrencyService;
 import com.bcp.challenge.exchangerate.service.ExchangeTypeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -54,6 +55,7 @@ public class ExchangeTypeServiceImpl implements ExchangeTypeService {
     }
 
     @Override
+    @Transactional
     public ExchangeTypeResponse createExchangeType(ExchangeTypeRequest request) {
         Optional<CurrencyEntity> localCurrency = this.currencyRepository.findById(request.getLocalCurrencyId());
         if(localCurrency.isEmpty()){
@@ -80,6 +82,7 @@ public class ExchangeTypeServiceImpl implements ExchangeTypeService {
     }
 
     @Override
+    @Transactional
     public void updateExchangeType(Long id, ExchangeTypeRequest request) {
         Optional<ExchangeTypeEntity> exchangeTypeEntity = this.exchangeRateRepository.findById(id);
         if(exchangeTypeEntity.isEmpty()){

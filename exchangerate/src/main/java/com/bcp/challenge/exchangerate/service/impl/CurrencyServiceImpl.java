@@ -6,6 +6,7 @@ import com.bcp.challenge.exchangerate.repository.CurrencyRepository;
 import com.bcp.challenge.exchangerate.service.CurrencyService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -19,6 +20,7 @@ public class CurrencyServiceImpl implements CurrencyService {
     private CurrencyRepository repository;
 
     @Override
+    @Transactional
     public CurrencyModel createCurrency(CurrencyModel currencyModel) {
         CurrencyEntity entity = new CurrencyEntity();
         entity.setCodigo(currencyModel.getCodigo());

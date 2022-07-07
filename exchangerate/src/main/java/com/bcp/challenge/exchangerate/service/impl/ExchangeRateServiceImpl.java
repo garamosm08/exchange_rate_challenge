@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Date;
 import java.util.List;
@@ -33,6 +34,7 @@ public class ExchangeRateServiceImpl implements ExchangeRateService {
     private ExchangeRateRepository exchangeRateRepository;
 
     @Override
+    @Transactional
     public ExchangeRateResponse doExchangeRate(ExchangeRateRequest request) {
         String username = ((UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getUsername();
         Optional<UserEntity> userEntity = Optional.ofNullable(this.userRepository.findByUsername(username));
