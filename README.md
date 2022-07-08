@@ -9,7 +9,7 @@ Este repositorio contiene información funcional y guía de cómo instalar la ap
 * Spring Boot.
 * Jwt.
 * Postgresql.
-* Angular.
+* Angular 11.
 * Docker.
 
 ## Información funcional
@@ -21,8 +21,8 @@ Este repositorio contiene información funcional y guía de cómo instalar la ap
 ## Información técnica
 
 * [API Back-end](https://github.com/garamosm08/exchange_rate_challenge/tree/master/exchangerate).
+* [Angular Front-end](https://github.com/garamosm08/exchange_rate_challenge/tree/master/frontexchangerate)
 * [Scripts SQL](https://github.com/garamosm08/exchange_rate_challenge/tree/master/sql_scripts).
-
 
 ## Instalación de ambiente
 

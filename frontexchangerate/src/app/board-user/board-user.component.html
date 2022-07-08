@@ -26,13 +26,13 @@
     
     <div style="margin-bottom: 2%">
       <div class="form-check form-check-inline">
-        <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="c" checked>
+        <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="1" (change)="changeExchangeAction($event)" checked>
         <label class="form-check-label" for="exampleRadios1">
         Compra
         </label>
     </div>
     <div class="form-check form-check-inline">
-        <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="v">
+        <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="2" (change)="changeExchangeAction($event)">
         <label class="form-check-label" for="exampleRadios2">
         Venta
         </label>
@@ -41,37 +41,29 @@
 
   <div class="row" style="margin-bottom: 5%">
     <div class="col-md">
-      <select id="currencies" class="browser-default custom-select" >
-        <option *ngFor="let currency of currencies" value="currency.id">{{currency.etiqueta}}</option>
+      <select id="currencies" class="browser-default custom-select" #mySelect (change)='onOptionsSelected(mySelect.value)'>
+        <option *ngFor="let currency of currencies" value="{{currency.id}}">{{currency.etiqueta}}</option>
       </select>
     </div>
     <div class="col-md">
-      <input class="form-control" type="text" placeholder="Digita monto">
+      <input class="form-control" type="text" placeholder="Digita monto" (change)="changeAmount($event)">
     </div>
   </div>
 
   <div class="row" style="margin-bottom: 5%">
     <div class="col-md">
       <div class="form-group">
-        <label for="exampleFormControlSelect1">Example select</label>
-        <select class="form-control" id="exampleFormControlSelect1">
-          <option>1</option>
-          <option>2</option>
-          <option>3</option>
-          <option>4</option>
-          <option>5</option>
+        <label for="exampleFormControlSelect1">Cuenta origen</label>
+        <select id="sourceAccounts" class="browser-default custom-select" #sourceAccount (change)='onSourceAccountSelected(sourceAccount.value)'>
+          <option *ngFor="let sourceAccount of sourceAccounts" value="{{sourceAccount.id}}">{{sourceAccount.label}}</option>
         </select>
       </div>
     </div>
     <div class="col-md">
       <div class="form-group">
-        <label for="exampleFormControlSelect1">Example select</label>
-        <select class="form-control" id="exampleFormControlSelect1">
-          <option>1</option>
-          <option>2</option>
-          <option>3</option>
-          <option>4</option>
-          <option>5</option>
+        <label for="exampleFormControlSelect1">Cuenta destino</label>
+        <select id="sourceAccounts" class="browser-default custom-select" #targetAccount (change)='onTargetAccountSelected(targetAccount.value)'>
+          <option *ngFor="let targetAccount of targetAccounts" value="{{targetAccount.id}}">{{targetAccount.label}}</option>
         </select>
       </div>
     </div>
@@ -97,6 +89,6 @@
       </tbody>
     </table>
 
-    <a class="btn btn-lg btn-primary" href="" role="button">Procesar</a>
+    <a class="btn btn-lg btn-primary" role="button" (click)='doProcess($event)'>Procesar</a>
   </div>
 </div>
