@@ -1,5 +1,8 @@
 package com.bcp.challenge.exchangerate.model;
 
+import java.util.HashSet;
+import java.util.Set;
+
 public class UserResponse {
 
     private Long id;
@@ -7,11 +10,14 @@ public class UserResponse {
     private String firstname;
     private String lastName;
 
-    public UserResponse(Long id, String username, String firstname, String lastName) {
+    private Set<String> roles = new HashSet<>();
+
+    public UserResponse(Long id, String username, String firstname, String lastName, Set<String> roles) {
         this.id = id;
         this.username = username;
         this.firstname = firstname;
         this.lastName = lastName;
+        this.roles = roles;
     }
 
     public Long getId() {
@@ -44,5 +50,13 @@ public class UserResponse {
 
     public void setLastName(String lastName) {
         this.lastName = lastName;
+    }
+
+    public Set<String> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(Set<String> roles) {
+        this.roles = roles;
     }
 }

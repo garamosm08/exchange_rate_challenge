@@ -1,9 +1,6 @@
 package com.bcp.challenge.exchangerate.controller;
 
-import com.bcp.challenge.exchangerate.model.JwtRequest;
-import com.bcp.challenge.exchangerate.model.JwtResponse;
-import com.bcp.challenge.exchangerate.model.UserModel;
-import com.bcp.challenge.exchangerate.model.UserResponse;
+import com.bcp.challenge.exchangerate.model.*;
 import com.bcp.challenge.exchangerate.service.CustomUserDetailService;
 import com.bcp.challenge.exchangerate.util.JwtUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +15,7 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 import java.security.Principal;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api/auth")
@@ -52,7 +50,8 @@ public class JwtController {
 
         UserDetails userDetails = customUserDetailService.loadUserByUsername(jwtRequest.getUserName());
         UserModel userModel = (UserModel) userDetails;
-        UserResponse userResponse = new UserResponse(userModel.getId(), userModel.getUsername(), userModel.getFirstName(), userModel.getLastName());
+        UserResponse userResponse = new UserResponse(userModel.getId(), userModel.getUsername(), userModel.getFirstName(),
+                userModel.getLastName(), userModel.getRoles().stream().map(RoleModel::getRoleName).collect(Collectors.toSet()));
 
         String jwtToken = jwtUtil.generateToken(userDetails);
 
@@ -66,7 +65,8 @@ public class JwtController {
     public ResponseEntity<UserResponse> getCurrentUser(Principal principal) {
         UserDetails userDetails =  this.customUserDetailService.loadUserByUsername(principal.getName());
         UserModel userModel = (UserModel) userDetails;
-        UserResponse userResponse = new UserResponse(userModel.getId(), userModel.getUsername(), userModel.getFirstName(), userModel.getLastName());
+        UserResponse userResponse = new UserResponse(userModel.getId(), userModel.getUsername(),
+                userModel.getFirstName(), userModel.getLastName(), userModel.getRoles().stream().map(RoleModel::getRoleName).collect(Collectors.toSet()));
 
         return new ResponseEntity<>(userResponse, HttpStatus.OK);
     }
