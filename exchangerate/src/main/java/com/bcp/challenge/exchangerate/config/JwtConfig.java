@@ -47,7 +47,8 @@ public class JwtConfig extends WebSecurityConfigurerAdapter  {
     protected void configure(HttpSecurity http) throws Exception {
         http
             .cors()
-            .and()
+                .disable()
+            //.and()
             .csrf()
             .disable()
             .authorizeRequests()
@@ -71,7 +72,7 @@ public class JwtConfig extends WebSecurityConfigurerAdapter  {
         return super.authenticationManagerBean();
     }
 
-    @Bean
+    /*@Bean
     public CorsFilter corsFilter() {
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         CorsConfiguration config = new CorsConfiguration();
@@ -81,5 +82,5 @@ public class JwtConfig extends WebSecurityConfigurerAdapter  {
         config.addAllowedMethod("*");
         source.registerCorsConfiguration("/**", config);
         return new CorsFilter(source);
-    }
+    }*/
 }
