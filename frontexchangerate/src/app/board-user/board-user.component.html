@@ -1,5 +1,102 @@
 <div class="container">
-  <header class="jumbotron">
-    <p>{{ content }}</p>
-  </header>
+  <div class="jumbotron" style="background-color: #fff; height: calc(95vh);">
+    <h1>Elige y cambia tu dinero</h1>
+    <p class="lead">
+      Selecciona una moneda e indica el monto que deseas cambiar
+    </p>
+    <table class="table table-hover" style="margin-bottom: 5%">
+      <thead>
+        <tr>
+          <th>Moneda Local</th>
+          <th>Moneda Extranjera</th>
+          <th>Compra</th>
+          <th>Venta</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let type of exchangetypes">
+  
+          <td>{{ type.localCurrencyLabel }}</td>
+          <td> {{ type.foreignCurrencyLabel }}</td>
+          <td> {{ type.purchaseValue }}</td>
+          <td> {{ type.salesValue }}</td>
+        </tr>
+      </tbody>
+    </table>
+    
+    <div style="margin-bottom: 2%">
+      <div class="form-check form-check-inline">
+        <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="c" checked>
+        <label class="form-check-label" for="exampleRadios1">
+        Compra
+        </label>
+    </div>
+    <div class="form-check form-check-inline">
+        <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="v">
+        <label class="form-check-label" for="exampleRadios2">
+        Venta
+        </label>
+    </div>
+  </div>
+
+  <div class="row" style="margin-bottom: 5%">
+    <div class="col-md">
+      <select id="currencies" class="browser-default custom-select" >
+        <option *ngFor="let currency of currencies" value="currency.id">{{currency.etiqueta}}</option>
+      </select>
+    </div>
+    <div class="col-md">
+      <input class="form-control" type="text" placeholder="Digita monto">
+    </div>
+  </div>
+
+  <div class="row" style="margin-bottom: 5%">
+    <div class="col-md">
+      <div class="form-group">
+        <label for="exampleFormControlSelect1">Example select</label>
+        <select class="form-control" id="exampleFormControlSelect1">
+          <option>1</option>
+          <option>2</option>
+          <option>3</option>
+          <option>4</option>
+          <option>5</option>
+        </select>
+      </div>
+    </div>
+    <div class="col-md">
+      <div class="form-group">
+        <label for="exampleFormControlSelect1">Example select</label>
+        <select class="form-control" id="exampleFormControlSelect1">
+          <option>1</option>
+          <option>2</option>
+          <option>3</option>
+          <option>4</option>
+          <option>5</option>
+        </select>
+      </div>
+    </div>
+  </div>
+
+    <table class="table table-hover" style="margin-bottom: 5%">
+      <thead>
+        <tr>
+          <th>Cuenta</th>
+          <th>Número de cuenta</th>
+          <th>Moneda</th>
+          <th>Saldo</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let account of accounts">
+  
+          <td>{{ account.label }}</td>
+          <td> {{ account.code }}</td>
+          <td> {{ account.currencyCode }}</td>
+          <td> {{ account.balance }}</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <a class="btn btn-lg btn-primary" href="" role="button">Procesar</a>
+  </div>
 </div>
