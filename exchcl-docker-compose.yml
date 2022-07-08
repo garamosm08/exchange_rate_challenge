@@ -1,0 +1,61 @@
+version: '3.9'
+services:
+
+  exchange-rate:
+    container_name: exchange-rate
+    restart: always
+    build:
+      context: exchangerate
+      dockerfile: Dockerfile
+    image: exchange-rate:latest
+    depends_on:
+      dbpostgres:
+        condition: service_healthy
+    ports:
+      - "8080:8080"
+    environment:
+      - JWT_SECRET=s0eX10Mk1ugaZGk8SJLY
+      - JWT_TOKEN_EXPIRATION_IN_MS=3600000
+      - SPRING_PROFILES_ACTIVE=dev
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://dbpostgres:5432/exchcl
+      - SPRING_DATASOURCE_USERNAME=postgres
+      - SPRING_DATASOURCE_PASSWORD=postgres
+      - SPRING_JPA_HIBERNATE_DDL_AUTO=none
+      - SPRING_JPA_SHOW_SQL=false
+    networks:
+      - exchcl-net
+
+  # Se define las configuraciones para la BD postgres
+  dbpostgres:
+    # Se utiliza la imagen de la BD levantada en harbor
+    image: "postgres:14.1-alpine"
+    restart: always
+    # Se agregar el nombre para la BD
+    container_name: dbpostgres
+    # Se define el volumen para almacenar los datos de la BD
+    volumes: 
+      - ./postgres-data:/var/lib/postgresql/data
+      # copy the sql script to create tables
+      - ./sql_scripts/initialize_db.sql:/docker-entrypoint-initdb.d/initialize_db.sql
+    # Se expone el puerto 5432 en el host para la BD
+    ports:
+      - "5432:5432"
+    # Se definen la variables de ambiente para las credenciales de la BD
+    environment:
+      - POSTGRES_DB=exchcl
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - PGDATA=/tmp
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    # Se asigna el contenedor para tener acceso en la red de exchcl-net
+    networks:
+      - exchcl-net
+
+# Se define la red exchcl-net
+networks:
+  exchcl-net:
+    driver: bridge
