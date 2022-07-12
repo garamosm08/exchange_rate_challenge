@@ -114,10 +114,22 @@ export class BoardUserComponent implements OnInit {
     console.log("click");
     
     let tempSourceAccount = this.accounts.find(a => a.id === this.sourceAccountSelected);
+    if(typeof tempSourceAccount === 'undefined'){
+      return;
+    }
     let sourceCurrency = this.currencies.find(c => c.codigo === tempSourceAccount.currencyCode);
+    if(typeof sourceCurrency === 'undefined'){
+      return;
+    }
 
     let tempTargetAccount = this.accounts.find(a => a.id === this.targetAccountSelected);
+    if(typeof tempTargetAccount === 'undefined'){
+      return;
+    }
     let targetCurrency = this.currencies.find(c => c.codigo === tempTargetAccount.currencyCode);
+    if(typeof targetCurrency === 'undefined'){
+      return;
+    }
 
     let requestExchangeRate = {
       "sourceAccountId": this.sourceAccountSelected,
